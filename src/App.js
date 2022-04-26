@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+import * as React from 'react';
 import './App.css';
+import AddItemModal from './components/AddItemModal';
+import ItemList from './components/ItemList';
+import store from './store';
+import { useSelector } from 'react-redux';
 
 function App() {
-  return (
+    const items = useSelector((state) => state.itemsReducer.items)
+
+    return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        Shopping Lists
       </header>
+        <section className="main">
+
+            {items.length === 0 &&
+                <div className="shoppingListIsEmpty">
+                    <div>Your shopping list is empty :( </div>
+                </div>
+            }
+
+            <AddItemModal />
+
+            <section className="itemList">
+            { items.length !== 0  && items.map((item, i) => (
+                <ItemList
+                 key={i}
+                 i={i}
+                 name={item.name}
+                 description={item.description}
+                />
+            )) }
+            </section>
+
+        </section>
+
     </div>
   );
 }
