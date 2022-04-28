@@ -4,9 +4,14 @@ import AddItemModal from './components/AddItemModal';
 import ItemList from './components/ItemList';
 import store from './store';
 import { useSelector } from 'react-redux';
+import {useEffect} from "react";
 
 function App() {
     const items = useSelector((state) => state.itemsReducer.items)
+
+    useEffect(() => {
+
+    });
 
     return (
     <div className="App">

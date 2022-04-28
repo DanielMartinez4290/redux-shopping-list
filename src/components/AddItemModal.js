@@ -9,7 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
-export default function AddItemModal(props) {
+export default function AddItemModal() {
 
     const style = {
         position: 'absolute',
@@ -24,6 +24,7 @@ export default function AddItemModal(props) {
     };
 
     const [open, setOpen] = React.useState(false);
+    const [id, setId] = React.useState(0);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const items = useSelector((state) => state.itemsReducer.items)
@@ -35,11 +36,14 @@ export default function AddItemModal(props) {
 
 
     const addTask = () => {
-        store.dispatch({ type: 'addItem', payload: {'name':itemName, 'description':description} });
+        store.dispatch({ type: 'addItem', payload: {'id':id, 'name':itemName, 'description':description} });
+
+        setId(id+1);
         setItemName("");
         setDescription("");
         setHowMany("");
         handleClose();
+        console.log(store.getState());
     }
 
     const handleChange = (event) => {

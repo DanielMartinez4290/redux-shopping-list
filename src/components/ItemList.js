@@ -12,7 +12,7 @@ export default function ItemList(props) {
 
     const deleteItem = (i) => {
         console.log('the passed in id is %o', i);
-        store.dispatch({ type: 'deleteItem', payload: {'id':i} });
+        store.dispatch({ type: 'deleteItem', payload: {'id': i} });
     }
 
     return <div className="item">
