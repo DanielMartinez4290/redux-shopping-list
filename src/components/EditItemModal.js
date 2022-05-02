@@ -7,9 +7,10 @@ import store from '../store';
 import {useSelector} from "react-redux";
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import EditIcon from "@mui/icons-material/Edit";
 
 
-export default function AddItemModal() {
+export default function EditItemModal(props) {
 
     const style = {
         position: 'absolute',
@@ -27,23 +28,16 @@ export default function AddItemModal() {
     const [id, setId] = React.useState(0);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const items = useSelector((state) => state.itemsReducer.items)
 
 
-    const [itemName, setItemName] = useState("");
-    const [description, setDescription] = useState("");
-    const [howMany, setHowMany] = useState("");
+    const [itemName, setItemName] = useState(props.name);
+    const [description, setDescription] = useState(props.description);
+    const [howMany, setHowMany] = useState(props.howMany);
 
 
-    const addTask = () => {
-        store.dispatch({ type: 'addItem', payload: {'id':id, 'name':itemName, 'description':description, 'howMany': howMany } });
-
-        setId(id+1);
-        setItemName("");
-        setDescription("");
-        setHowMany("");
+    const saveTask = () => {
+        store.dispatch({ type: 'editItem', payload: {'id':id, 'name':itemName, 'description':description, 'howMany': howMany} });
         handleClose();
-        console.log(store.getState());
     }
 
     const handleChange = (event) => {
@@ -51,13 +45,7 @@ export default function AddItemModal() {
     };
 
     return <div id="addItemModal">
-        {items.length === 0 && <Button variant="contained" onClick={handleOpen}>
-            Add your first item
-        </Button>}
-
-        {items.length !== 0 && <Button className="addItemButton" variant="contained" onClick={handleOpen}>
-            Add Item
-        </Button> }
+        <EditIcon onClick={handleOpen} />
 
         <Modal
             open={open}
@@ -68,8 +56,8 @@ export default function AddItemModal() {
             <Box sx={style}>
                 <div id="shoppingList">SHOPPING LIST</div>
                 <div id="modalContent">
-                    <div id="addAnItem">Add an item</div>
-                    <div id="addYourNewItemBelow">Add your new item below</div>
+                    <div id="addAnItem">Edit an item</div>
+                    <div id="addYourNewItemBelow">Edit your item below</div>
                     <TextField
                         id="itemName" label="Item Name" variant="outlined"
                         onChange={(e) => {
@@ -103,7 +91,7 @@ export default function AddItemModal() {
                             <Button onClick={handleClose} className="modalCancelButton">Cancel</Button>
                         </Box>
                         <Box m={10}>
-                            <Button onClick={addTask} variant="contained">Add Task</Button>
+                            <Button onClick={saveTask} variant="contained">Save Item</Button>
                         </Box>
                     </div>
                 </div>

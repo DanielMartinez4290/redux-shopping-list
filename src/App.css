@@ -60,8 +60,15 @@
   font-weight:700;
   margin-bottom:5px;
 }
+.item .itemName.completed {
+  text-decoration:line-through;
+  color:#4D81B7;
+}
 .item .description {
   text-align: left;
+}
+.item .description.completed {
+  text-decoration:line-through;
 }
 .item .itemNameDescription {
   float:left;

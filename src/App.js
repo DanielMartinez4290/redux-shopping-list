@@ -7,11 +7,12 @@ import { useSelector } from 'react-redux';
 import {useEffect} from "react";
 
 function App() {
-    const items = useSelector((state) => state.itemsReducer.items)
+    let items = useSelector((state) => state.itemsReducer.items)
 
     useEffect(() => {
-
-    });
+        console.log(store.getState());
+        console.log('the items are %o', items);
+    }, [items]);
 
     return (
     <div className="App">
@@ -29,14 +30,16 @@ function App() {
             <AddItemModal />
 
             <section className="itemList">
-            { items.length !== 0  && items.map((item, i) => (
-                <ItemList
-                 key={i}
-                 i={i}
-                 name={item.name}
-                 description={item.description}
-                />
-            )) }
+                { items.length !== 0  && items.map((item, i) => (
+                    <ItemList
+                     key={i}
+                     i={i}
+                     id={item.id}
+                     name={item.name}
+                     description={item.description}
+                     howMany={item.howMany}
+                    />
+                )) }
             </section>
 
         </section>

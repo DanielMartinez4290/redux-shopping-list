@@ -3,31 +3,34 @@ const initialState = {
 }
 
 export default function itemsReducer(state = initialState, action) {
-    console.log("the action type is %o", action.type);
     switch (action.type) {
         case 'addItem': {
-            console.log('add item tripped');
             return {
                 ...state,
                 items: [...state.items, action.payload],
             }
         }
         case 'deleteItem': {
-
-            console.log('delete item trippedsss');
             return {
                 ...state,
-                //items: state.items.filter(item => item.id === action.payload.id)
+                items: state.items.filter(item => item.id !== action.payload.id)
             }
         }
         case 'editItem': {
-            console.log("item edited");
-        }
-        case 'INCREMENT_ASYNC': {
-            console.log("increment async tripped");
-        }
-        case 'INCREMENT': {
-            console.log("increment tripped");
+
+            return {
+                ...state,
+                items: state.items.map(function(item){
+                    if (item.id === action.payload.id) {
+                        item.description = action.payload.description;
+                        item.name = action.payload.name;
+                        item.howMany = action.payload.howMany;
+                        return item;
+                    }
+
+                    return item;
+                })
+            }
         }
         default:
             return state
