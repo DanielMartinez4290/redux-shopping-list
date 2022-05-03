@@ -1,24 +1,21 @@
 import React, { useState } from "react";
-import store from '../store';
 import Checkbox from '@mui/material/Checkbox';
-import DeleteIcon from '@mui/icons-material/Delete';
 import EditItemModal from "./EditItemModal";
-
+import DeleteItemModal from "./DeleteItemModal";
 
 export default function ItemList(props) {
-
     const [completed, setCompleted] = useState('not-completed');
-
-    const deleteItem = (id) => {
-        store.dispatch({ type: 'deleteItem', payload: {'id': id} });
-    }
 
     return <div className="item">
         <Checkbox
             className="itemCheckbox"
+            value={completed}
             onChange={(e) => {
-                //console.log(e.target.value);
-                setCompleted('completed');
+                if (completed ==='completed') {
+                    setCompleted('not-completed')
+                } else {
+                    setCompleted('completed');
+                }
             }}
         />
         <div className="itemNameDescription">
@@ -34,7 +31,9 @@ export default function ItemList(props) {
             />
         </div>
         <div className="deleteItem">
-            <DeleteIcon onClick={() => deleteItem(props.id) } />
+            <DeleteItemModal
+                id={props.id}
+            />
         </div>
     </div>;
 }

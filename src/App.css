@@ -14,8 +14,10 @@
   height:400px;
 }
 #shoppingList {
-  background-color:gray;
+  background-color:#FAFAFA;;
   padding:14px;
+  font-weight: 600;
+  margin-left:20px;
 }
 
 /* Modal Styles */
@@ -91,6 +93,8 @@
 }
 .cancelAddTask {
   margin-left:140px;
+  float:right;
+  margin:30px 0 30px 0;
 }
 #how-many-select {
   margin-top:10px;
@@ -99,4 +103,8 @@
 .MuiInputBase-root {
   width:100%;
   margin-top:20px;
+}
+
+.deleteItemHeader {
+  margin-top:70px;
 }

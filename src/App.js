@@ -2,17 +2,10 @@ import * as React from 'react';
 import './App.css';
 import AddItemModal from './components/AddItemModal';
 import ItemList from './components/ItemList';
-import store from './store';
 import { useSelector } from 'react-redux';
-import {useEffect} from "react";
 
 function App() {
     let items = useSelector((state) => state.itemsReducer.items)
-
-    useEffect(() => {
-        console.log(store.getState());
-        console.log('the items are %o', items);
-    }, [items]);
 
     return (
     <div className="App">

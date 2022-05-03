@@ -1,30 +1,30 @@
 import { put, takeEvery, all } from 'redux-saga/effects'
 
-const delay = (ms) => new Promise(res => setTimeout(res, ms))
-
-
-function* incrementAsync() {
-    yield delay(1000)
-    yield put({ type: 'INCREMENT' })
-}
-
-function* watchIncrementAsync() {
-    yield takeEvery('INCREMENT_ASYNC', incrementAsync)
-}
-
 function* addItem() {
-    yield delay(1000)
-    console.log('add item tripped from saga');
-    yield put({ type: 'addItem' })
+    //yield put({ type: 'addItem' })
+}
+function* watchAddItem() {
+    yield takeEvery('addItem', addItem)
 }
 
-function* watchAddItem() {
-    //yield takeEvery('addItem', addItem)
+function* editItem() {
+    //yield put({ type: 'editItem' })
+}
+function* watchEditItem() {
+    yield takeEvery('editItem', editItem)
+}
+
+function* deleteItem() {
+    //yield put({ type: 'deleteItem' })
+}
+function* watchDeleteItem() {
+    yield takeEvery('deleteItem', editItem)
 }
 
 export default function* rootSaga() {
     yield all([
-        watchIncrementAsync(),
-        watchAddItem()
+        watchAddItem(),
+        watchEditItem(),
+        watchDeleteItem()
     ])
 }

@@ -17,7 +17,6 @@ export default function itemsReducer(state = initialState, action) {
             }
         }
         case 'editItem': {
-
             return {
                 ...state,
                 items: state.items.map(function(item){

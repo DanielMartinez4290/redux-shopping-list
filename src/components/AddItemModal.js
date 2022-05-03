@@ -7,6 +7,8 @@ import store from '../store';
 import {useSelector} from "react-redux";
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 
 export default function AddItemModal() {
@@ -85,24 +87,27 @@ export default function AddItemModal() {
                         value={description}
                     />
 
-                    <Select
-                        labelId="how-many-select-label"
-                        id="how-many-select"
-                        value={howMany}
-                        label="How Many?"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                    </Select>
+                    {/*<FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                        <InputLabel id="how-many-select-label">How many?</InputLabel> */}
+                        <Select
+                            labelId="how-many-select-label"
+                            id="how-many-select"
+                            value={howMany}
+                            label="How Many?"
+                            onChange={handleChange}
+                        >
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                        </Select>
+                    {/* </FormControl> */}
 
 
                     <div className="cancelAddTask">
-                        <Box m={10}>
+                        <Box sx={{ display: 'inline' }}>
                             <Button onClick={handleClose} className="modalCancelButton">Cancel</Button>
                         </Box>
-                        <Box m={10}>
+                        <Box sx={{ display: 'inline' }}>
                             <Button onClick={addTask} variant="contained">Add Task</Button>
                         </Box>
                     </div>

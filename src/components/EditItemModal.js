@@ -4,7 +4,6 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
 import store from '../store';
-import {useSelector} from "react-redux";
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import EditIcon from "@mui/icons-material/Edit";
@@ -29,20 +28,14 @@ export default function EditItemModal(props) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-
     const [itemName, setItemName] = useState(props.name);
     const [description, setDescription] = useState(props.description);
     const [howMany, setHowMany] = useState(props.howMany);
 
-
     const saveTask = () => {
-        store.dispatch({ type: 'editItem', payload: {'id':id, 'name':itemName, 'description':description, 'howMany': howMany} });
+        store.dispatch({ type: 'editItem', payload: {'id':props.id, 'name':itemName, 'description':description, 'howMany': howMany} });
         handleClose();
     }
-
-    const handleChange = (event) => {
-        setHowMany(event.target.value);
-    };
 
     return <div id="addItemModal">
         <EditIcon onClick={handleOpen} />
@@ -78,19 +71,20 @@ export default function EditItemModal(props) {
                         id="how-many-select"
                         value={howMany}
                         label="How Many?"
-                        onChange={handleChange}
+                        onChange={(e) => {
+                            setHowMany(e.target.value);
+                        }}
                     >
                         <MenuItem value={1}>1</MenuItem>
                         <MenuItem value={2}>2</MenuItem>
                         <MenuItem value={3}>3</MenuItem>
                     </Select>
 
-
                     <div className="cancelAddTask">
-                        <Box m={10}>
+                        <Box sx={{ display: 'inline' }}>
                             <Button onClick={handleClose} className="modalCancelButton">Cancel</Button>
                         </Box>
-                        <Box m={10}>
+                        <Box sx={{ display: 'inline' }}>
                             <Button onClick={saveTask} variant="contained">Save Item</Button>
                         </Box>
                     </div>
